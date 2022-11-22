@@ -11,20 +11,20 @@ datasource db {
 }
 
 model Book {
-  id        Int         @id @default(autoincrement())
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  title     String      @db.VarChar(100)
-  sinopsis  String?
-  status    BookStatus  @default(AVAILABLE)
-  authorId  Int
-  author    Author      @relation(fields: [authorId], references: [id])
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  title       String      @db.VarChar(100)
+  sinopsis    String?
+  bookStatus  BookStatus  @default(AVAILABLE)
+  authorId    Int
+  author      Author      @relation(fields: [authorId], references: [id])
 }
 
 model Author {
-  id        Int       @id @default(autoincrement())
-  name      String    @db.VarChar(50)
-  books     Book[]
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(50)
+  books       Book[]
 }
 
 enum BookStatus {
