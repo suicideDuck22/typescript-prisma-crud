@@ -10,7 +10,7 @@ export const listBooksController = async (request: Request<ReqQuery>, response: 
         if(!request.query.booked){
             const books = await prismaClient.book.findMany();
             console.log(books);
-            return response.status(200).end();
+            return response.json(books).status(200).end();
         }
         console.log("Specific");
         return response.status(200).end();
