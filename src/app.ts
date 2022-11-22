@@ -8,7 +8,7 @@ const app: Express.Application = Express();
 
 app.use(bodyParser.urlencoded({
     extended: true
-}))
+}));
 app.use(cors());
 
 app.use('/books', router);

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { prismaClient } from "../../database/prismaClient";
 
 interface ReqQuery {
     booked?: number
@@ -6,9 +7,9 @@ interface ReqQuery {
 
 export const listBooksController = async (request: Request<ReqQuery>, response: Response) => {
     try{
-        console.log(request.query)
         if(!request.query.booked){
-            console.log("All");
+            const books = await prismaClient.book.findMany();
+            console.log(books);
             return response.status(200).end();
         }
         console.log("Specific");

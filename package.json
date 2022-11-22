@@ -1,5 +1,8 @@
 {
   "name": "typescript-prisma-crud",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
     "lint": "eslint ."
