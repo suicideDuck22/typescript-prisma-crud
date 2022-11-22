@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { Request, Response } from "express";
 
 interface ReqQuery {
     booked?: number
@@ -14,6 +14,6 @@ export const listBooksController = async (request: Request<ReqQuery>, response: 
         return response.status(200).end();
     } catch(error) {
         console.log(error);
-        return response.status(500).end()
+        return response.status(500).end();
     }
 }
