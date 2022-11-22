@@ -4,7 +4,7 @@ import cors from "cors";
 
 import { router } from "./routes/books";
 
-const app = Express();
+const app: Express.Application = Express();
 
 app.use(bodyParser.urlencoded({
     extended: true

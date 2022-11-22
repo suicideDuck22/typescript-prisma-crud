@@ -1,6 +1,10 @@
 import { Request, Response } from "express"
 
-export const listBooksController = async (request: Request, response: Response) => {
+interface ReqQuery {
+    booked?: number
+}
+
+export const listBooksController = async (request: Request<ReqQuery>, response: Response) => {
     try{
         if(!request.query.booked){
             console.log("All");
@@ -10,6 +14,6 @@ export const listBooksController = async (request: Request, response: Response) 
         return response.status(200).end();
     } catch(error) {
         console.log(error);
-        return response.status(500).end();
+        return response.status(500).end()
     }
 }
