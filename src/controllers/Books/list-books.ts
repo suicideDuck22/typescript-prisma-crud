@@ -6,6 +6,7 @@ interface ReqQuery {
 
 export const listBooksController = async (request: Request<ReqQuery>, response: Response) => {
     try{
+        console.log(request.query)
         if(!request.query.booked){
             console.log("All");
             return response.status(200).end();
