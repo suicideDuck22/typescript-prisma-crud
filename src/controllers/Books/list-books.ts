@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../../database/prismaClient";
+import { BookModel } from "../../classes/BookModel";
 
-type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';
+export type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';
 
 const noBooksFounded = (response: Response) => {
     response.json({ message: "No books founded." }).status(200).end();
@@ -10,7 +11,7 @@ const noBooksFounded = (response: Response) => {
 export const listBooksController = async (request: Request, response: Response) => {
     try{
         if(!request.query.status){
-            const books = await prismaClient.book.findMany();
+            const books: BookModel[] = await prismaClient.book.findMany();
             if(books.length === 0){
                 return noBooksFounded(response);
             }
@@ -18,7 +19,7 @@ export const listBooksController = async (request: Request, response: Response) 
         }
 
         const status: BookStatus = request.query.status as BookStatus;
-        const books = await prismaClient.book.findMany({
+        const books: BookModel[] = await prismaClient.book.findMany({
             where: {
                 bookStatus: status
             }
