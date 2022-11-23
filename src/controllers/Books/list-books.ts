@@ -15,7 +15,7 @@ export const listBooksController = async (request: Request, response: Response) 
             if(books.length === 0){
                 return noBooksFounded(response);
             }
-            return response.status(200).end();
+            return response.json(books).status(200).end();
         }
 
         const status: BookStatus = request.query.status as BookStatus;

@@ -12,6 +12,7 @@ const config: Config.InitialOptions = {
     transform: {
       "^.+\\.(ts|tsx)$": "ts-jest",
     },
+    setupFilesAfterEnv: ['jest-extended/all'],
 }
 
 export default config

@@ -23,6 +23,7 @@
     "eslint": "^8.28.0",
     "eslint-plugin-nodejs": "^0.0.1",
     "jest": "^29.3.1",
+    "jest-extended": "^3.2.0",
     "prisma": "^4.6.1",
     "supertest": "^6.3.1",
     "ts-jest": "^29.0.3",
