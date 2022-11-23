@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { prismaClient } from "../../database/prismaClient";
-import { BookModel } from "../../classes/BookModel";
+import { BookModel } from "../../models/BookModel";
 
 export type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';
 
