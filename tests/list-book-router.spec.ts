@@ -76,6 +76,6 @@ describe("GET /list-books", () => {
             .get("/books/list-books?status=TESTUNAVAILABLE")
         
         expect(response.statusCode).toBe(400)
-        expect(response.body.error).toBe("An invalid parameter to search has been passed.")
+        expect(response.text).toBe("Invalid book status informed TESTUNAVAILABLE.")
     })
 });
