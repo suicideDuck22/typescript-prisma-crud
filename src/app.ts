@@ -9,13 +9,13 @@ import { router } from "./routes/books";
 const app = express();
 
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
+app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/books', router);
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use(errorMiddleware);
 
 export default app;
