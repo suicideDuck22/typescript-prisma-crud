@@ -1,13 +1,14 @@
 import app from "../src/app";
 import request from "supertest";
 import { BookModel } from "../src/models/BookModel";
+import { HttpCode } from '../src/exceptions/HttpCode'
 
 describe("GET /list-books", () => {
     it("Return all books objects inside an array with correct props, and status code 200.", async () => {
         const response = await request(app)
             .get("/books/list-books")
         
-        expect(response.statusCode).toEqual(200);
+        expect(response.statusCode).toEqual(HttpCode.SUCCESS);
         response.body.forEach((bookObject: BookModel) => {
             expect(bookObject).toEqual(
                 expect.objectContaining({
@@ -27,7 +28,7 @@ describe("GET /list-books", () => {
         const response = await request(app)
             .get("/books/list-books?status=AVAILABLE")
         
-        expect(response.statusCode).toEqual(200);
+        expect(response.statusCode).toEqual(HttpCode.SUCCESS);
         if(!Array.isArray(response.body)){
             expect(response.body.message).toBe('No books founded.');
         } else {
@@ -51,7 +52,7 @@ describe("GET /list-books", () => {
         const response = await request(app)
             .get("/books/list-books?status=UNAVAILABLE")
         
-        expect(response.statusCode).toEqual(200);
+        expect(response.statusCode).toEqual(HttpCode.SUCCESS);
         if(!Array.isArray(response.body)){
             expect(response.body.message).toBe('No books founded.');
         } else {
@@ -75,7 +76,7 @@ describe("GET /list-books", () => {
         const response = await request(app)
             .get("/books/list-books?status=TESTUNAVAILABLE")
         
-        expect(response.statusCode).toBe(400)
+        expect(response.statusCode).toBe(HttpCode.BAD_REQUEST)
         expect(response.text).toBe("Invalid book status informed TESTUNAVAILABLE.")
     })
 });

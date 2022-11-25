@@ -1,7 +1,8 @@
 import { HttpException } from "./HttpException";
+import { HttpCode } from "./HttpCode";
 
 export class InvalidIdException extends HttpException{
-    constructor(id: string){
-        super(400, `The id of book must be a number, but received: ${id}.`);
+    constructor(){
+        super(HttpCode.BAD_REQUEST, `The id of book must be a number and be positive.`);
     }
 }

@@ -1,6 +1,7 @@
 import app from '../src/app';
 import request from 'supertest';
 import { prismaClient } from '../src/database/prismaClient';
+import { HttpCode } from '../src/exceptions/HttpCode'
 
 describe('POST /add-book', () => {
     it('Must be return an error because author ID is not a number.', async () => {
@@ -13,7 +14,7 @@ describe('POST /add-book', () => {
                 authorId: 'test'
             });
 
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(HttpCode.BAD_REQUEST);
         expect(response.text).toBe('Author ID must be a number, but received test.');
     })
 
@@ -27,7 +28,7 @@ describe('POST /add-book', () => {
                 authorId: '1'
             });
 
-        expect(response.statusCode).toBe(400);
+        expect(response.statusCode).toBe(HttpCode.BAD_REQUEST);
         expect(response.text).toBe('Book need to have a title.');
     })
 
@@ -41,7 +42,7 @@ describe('POST /add-book', () => {
                 authorId: '99999'
             });
 
-        expect(response.statusCode).toBe(404);
+        expect(response.statusCode).toBe(HttpCode.NOT_FOUND);
         expect(response.text).toBe('Author ID 99999 not exist.');
     })
 
@@ -55,7 +56,7 @@ describe('POST /add-book', () => {
                 authorId: '1'
             });
 
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(HttpCode.SUCCESS);
         expect(response.body.message).toBe("Book 'Title success' added successfully to the database!");
         expect(response.body.newBook).toEqual(
             expect.objectContaining({
