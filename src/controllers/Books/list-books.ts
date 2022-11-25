@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { prismaClient } from "../../database/prismaClient";
-import { BookModel } from "../../models/BookModel";
-import { InvalidBookStatusException } from "../../exceptions/InvalidBookStatusException";
-import { HttpCode } from "../../exceptions/HttpCode";
+import { BookQueries } from "../../services/BookQueries";
+import { BookModel } from "../../models/Book";
+import { InvalidBookStatusException } from "../../error/InvalidBookStatusException";
+import { HttpCode } from "../../error/HttpCode";
 
 export type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';
 
@@ -12,7 +12,7 @@ const noBooksFounded = (response: Response) => {
 
 export const listBooksController = async (request: Request, response: Response) => {
     if(!request.query.status){
-        const books: BookModel[] = await prismaClient.book.findMany();
+        const books: BookModel[] = await BookQueries.listBooks();
         if(books.length === 0){
             return noBooksFounded(response);
         }
@@ -24,11 +24,7 @@ export const listBooksController = async (request: Request, response: Response) 
     }
 
     const status: BookStatus = request.query.status as BookStatus;    
-    const books: BookModel[] = await prismaClient.book.findMany({
-        where: {
-            bookStatus: status
-        }
-    });
+    const books: BookModel[] = await BookQueries.listBooksByStatus(status);
 
     if(books.length !== 0){
         return response.status(HttpCode.SUCCESS).json(books).end();

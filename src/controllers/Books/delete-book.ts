@@ -1,24 +1,15 @@
 import { Request, Response } from "express";
-import { prismaClient } from "../../database/prismaClient";
-import { BookNotFoundException } from "../../exceptions/BookNotFoundException";
-import { InvalidIdException } from "../../exceptions/InvalidIdException";
+import { InvalidIdException } from "../../error/InvalidIdException";
+import { BookQueries } from "../../services/BookQueries";
+import { BookModel } from "../../models/Book";
 
 export const deleteBookController = async (request: Request, response: Response) => {
     const { id } = request.body;
     if(isNaN(parseInt(id))) throw new InvalidIdException();
 
-    const bookToDelete = await prismaClient.book.findUnique({
-        where: {
-            id: parseInt(id)
-        }
-    })
-    if(bookToDelete === null) throw new BookNotFoundException(id);
+    const deletedBook: BookModel | void = await BookQueries.deleteBook(parseInt(id))
 
-    const deletedBook = await prismaClient.book.delete({
-        where: {
-            id: parseInt(id)
-        }
-    })
-
-    response.status(200).json({ message: `The book '${deletedBook.title}' has been deleted.`, deletedBook: deletedBook});
+    if(deletedBook){
+        response.status(200).json({ message: `The book '${deletedBook.title}' has been deleted.`, deletedBook: deletedBook});
+    }
 }

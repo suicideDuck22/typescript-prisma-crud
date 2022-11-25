@@ -1,6 +1,6 @@
 import app from '../src/app';
 import request from 'supertest';
-import { HttpCode } from '../src/exceptions/HttpCode'
+import { HttpCode } from '../src/error/HttpCode'
 
 describe('GET /view-book/:id', () => {
     it('Return an error if provide a param id not number.', async () => {
