@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
 import { InvalidIdException } from "../../error/InvalidIdException";
-import { BookNotFoundException } from "../../error/BookNotFoundException";
+import { BookNotFoundException } from "../../error/Book/BookNotFoundException";
 import { HttpCode } from "../../error/HttpCode";
 import { BookModel } from "../../models/Book";
 import { BookQueries } from "../../services/BookQueries";
+import { Validator } from "../../helpers/validator";
 
 export const viewBookController = async (request: Request, response: Response) => {
-    if(isNaN(
-        parseInt(request.params.id as string)
-    )) throw new InvalidIdException();
+    const bookId: number | false = Validator.isNumberAndPositive(request.params.id);
+    if(bookId === false) throw new InvalidIdException();
 
-    const id = parseInt(request.params.id as string);
-    const foundedBook: BookModel | null = await BookQueries.getBook(id);
+    const foundedBook: BookModel | null = await BookQueries.getBook(bookId);
 
-    if(foundedBook === null) throw new BookNotFoundException(id);
+    if(foundedBook === null) throw new BookNotFoundException(bookId);
 
     response.status(HttpCode.SUCCESS).json(foundedBook).end();
 }

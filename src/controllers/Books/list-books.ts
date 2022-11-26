@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BookQueries } from "../../services/BookQueries";
 import { BookModel } from "../../models/Book";
-import { InvalidBookStatusException } from "../../error/InvalidBookStatusException";
+import { InvalidBookStatusException } from "../../error/Book/InvalidBookStatusException";
 import { HttpCode } from "../../error/HttpCode";
 
 export type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';

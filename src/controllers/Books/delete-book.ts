@@ -2,10 +2,12 @@ import { Request, Response } from "express";
 import { InvalidIdException } from "../../error/InvalidIdException";
 import { BookQueries } from "../../services/BookQueries";
 import { BookModel } from "../../models/Book";
+import { Validator } from "../../helpers/validator";
 
 export const deleteBookController = async (request: Request, response: Response) => {
     const { id } = request.body;
-    if(isNaN(parseInt(id))) throw new InvalidIdException();
+    const parsedId: number | false = Validator.isNumberAndPositive(id);
+    if(parsedId === false) throw new InvalidIdException();
 
     const deletedBook: BookModel | void = await BookQueries.deleteBook(parseInt(id))
 

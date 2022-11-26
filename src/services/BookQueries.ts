@@ -1,6 +1,6 @@
 import { BookStatus } from "@prisma/client";
 import { prismaClient } from "../database/prismaClient";
-import { BookNotFoundException } from "../error/BookNotFoundException";
+import { BookNotFoundException } from "../error/Book/BookNotFoundException";
 import { BookModel } from "../models/Book";
 
 export abstract class BookQueries {

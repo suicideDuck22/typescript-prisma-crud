@@ -1,5 +1,5 @@
-import { HttpException } from "./HttpException";
-import { HttpCode } from "./HttpCode";
+import { HttpException } from "../HttpException";
+import { HttpCode } from "../HttpCode";
 
 export class BookNotFoundException extends HttpException{
     constructor(id: number){

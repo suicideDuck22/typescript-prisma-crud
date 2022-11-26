@@ -1,4 +1,4 @@
-import { HttpException } from "./HttpException";
+import { HttpException } from "../HttpException";
 
 export class InsertBookException extends HttpException{
     constructor(status: number, message: string){

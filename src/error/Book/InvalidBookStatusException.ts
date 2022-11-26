@@ -1,5 +1,5 @@
-import { HttpException } from "./HttpException";
-import { HttpCode } from "./HttpCode";
+import { HttpException } from "../HttpException";
+import { HttpCode } from "../HttpCode";
 
 export class InvalidBookStatusException extends HttpException{
     constructor(bookStatus: string){
