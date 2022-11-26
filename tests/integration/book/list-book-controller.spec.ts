@@ -1,7 +1,7 @@
-import app from "../src/app";
+import app from "../../../src/app";
 import request from "supertest";
-import { BookModel } from "../src/models/Book";
-import { HttpCode } from '../src/error/HttpCode'
+import { BookModel } from "../../../src/models/Book";
+import { HttpCode } from '../../../src/error/HttpCode'
 
 describe("GET /list-books", () => {
     it("Return all books objects inside an array with correct props, and status code 200.", async () => {

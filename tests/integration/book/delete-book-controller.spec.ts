@@ -1,6 +1,6 @@
-import app from '../src/app';
+import app from '../../../src/app';
 import request from 'supertest';
-import { HttpCode } from '../src/error/HttpCode'
+import { HttpCode } from '../../../src/error/HttpCode'
 
 describe('DELETE /delete-book', () => {
     it('Must be return an error because book ID is not a number.', async () => {

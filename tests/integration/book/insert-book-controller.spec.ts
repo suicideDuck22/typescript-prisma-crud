@@ -1,7 +1,7 @@
-import app from '../src/app';
+import app from '../../../src/app';
 import request from 'supertest';
-import { prismaClient } from '../src/database/prismaClient';
-import { HttpCode } from '../src/error/HttpCode'
+import { prismaClient } from '../../../src/database/prismaClient';
+import { HttpCode } from '../../../src/error/HttpCode'
 
 describe('POST /add-book', () => {
     it('Must be return an error because author ID is not a number.', async () => {
