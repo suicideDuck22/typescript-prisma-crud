@@ -2,14 +2,15 @@ import { Request, Response } from "express";
 import { InvalidIdException } from "../../error/InvalidIdException";
 import { BookQueries } from "../../services/BookQueries";
 import { BookModel } from "../../models/Book";
-import { Validator } from "../../helpers/validator";
+import { Validator } from "../../helpers/Validator";
+import { BookNotFoundException } from "../../error/Book/BookNotFoundException";
 
 export const deleteBookController = async (request: Request, response: Response) => {
-    const { id } = request.body;
-    const parsedId: number | false = Validator.isNumberAndPositive(id);
+    const parsedId: number | false = Validator.isNumberAndPositive(request.body.id);
     if(parsedId === false) throw new InvalidIdException();
 
-    const deletedBook: BookModel | void = await BookQueries.deleteBook(parseInt(id))
+    if(BookQueries.getBook(parsedId) === null) throw new BookNotFoundException(parsedId);
+    const deletedBook: BookModel | void = await BookQueries.deleteBook(parsedId);
 
     if(deletedBook){
         response.status(200).json({ message: `The book '${deletedBook.title}' has been deleted.`, deletedBook: deletedBook});

@@ -4,7 +4,7 @@ import { BookNotFoundException } from "../../error/Book/BookNotFoundException";
 import { HttpCode } from "../../error/HttpCode";
 import { BookModel } from "../../models/Book";
 import { BookQueries } from "../../services/BookQueries";
-import { Validator } from "../../helpers/validator";
+import { Validator } from "../../helpers/Validator";
 
 export const viewBookController = async (request: Request, response: Response) => {
     const bookId: number | false = Validator.isNumberAndPositive(request.params.id);

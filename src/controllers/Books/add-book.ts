@@ -3,7 +3,7 @@ import { InsertBookException } from "../../error/Book/InsertBookException";
 import { HttpCode } from "../../error/HttpCode";
 import { BookQueries } from "../../services/BookQueries";
 import { AuthorQueries } from "../../services/AuthorQueries";
-import { Validator } from "../../helpers/validator";
+import { Validator } from "../../helpers/Validator";
 
 export const addBookController = async (request: Request, response: Response) => {
     const { title, sinopsis, authorId } = request.body;

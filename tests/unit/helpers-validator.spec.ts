@@ -1,4 +1,4 @@
-import { Validator } from "../../src/helpers/validator"
+import { Validator } from "../../src/helpers/Validator"
 
 describe('Unit tests for isNumberAndPositive method', () => {
     it('Must be return false, because have letters.', () => {

@@ -1,6 +1,5 @@
 import { BookStatus } from "@prisma/client";
 import { prismaClient } from "../database/prismaClient";
-import { BookNotFoundException } from "../error/Book/BookNotFoundException";
 import { BookModel } from "../models/Book";
 
 export abstract class BookQueries {
@@ -35,9 +34,6 @@ export abstract class BookQueries {
     }
 
     public static async deleteBook(id: number): Promise<BookModel | void> {
-        const bookExist = await this.getBook(id);
-        if(!bookExist) throw new BookNotFoundException(id);
-
         return await prismaClient.book.delete({
             where: {
                 id: id
