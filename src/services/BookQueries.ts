@@ -40,4 +40,23 @@ export abstract class BookQueries {
             }
         })
     }
+
+    public static async updateBookInfos(
+        title: string,
+        sinopsis: string | null,
+        bookStatus: BookStatus,
+        authorId: number
+        ) {
+            return await prismaClient.book.update({
+                where: {
+                    id: authorId
+                },
+                data: {
+                    title: title,
+                    sinopsis: sinopsis,
+                    bookStatus: bookStatus,
+                    authorId: authorId
+                }
+            })
+    }
 }
