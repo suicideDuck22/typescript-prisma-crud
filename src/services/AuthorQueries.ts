@@ -1,4 +1,5 @@
 import { prismaClient } from "../database/prismaClient";
+
 import { AuthorModel } from "../models/Author";
 
 export abstract class AuthorQueries {

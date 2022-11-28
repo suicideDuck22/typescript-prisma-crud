@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
+
+import { InvalidBookStatusException } from "../../error/Book/InvalidBookStatusException";
+
 import { BookQueries } from "../../services/BookQueries";
 import { BookModel } from "../../models/Book";
-import { InvalidBookStatusException } from "../../error/Book/InvalidBookStatusException";
-import { HttpCode } from "../../error/HttpCode";
 
-export type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';
+import { HttpCode } from "../../error/HttpCode";
+import { BookStatus } from "../../models/Book";
 
 const noBooksFounded = (response: Response) => {
     response.status(HttpCode.SUCCESS).json({ message: "No books founded." }).end();

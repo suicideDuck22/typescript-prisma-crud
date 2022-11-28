@@ -1,11 +1,14 @@
 import { Request, Response } from "express"
+
 import { AuthorNotFoundException } from "../../error/Author/AuthorNotFountException";
 import { InsertUpdateBookException } from "../../error/Book/InsertUpdateBookException";
 import { InvalidBookStatusException } from "../../error/Book/InvalidBookStatusException";
-import { HttpCode } from "../../error/HttpCode";
-import { Validator } from "../../helpers/Validator";
+
 import { AuthorQueries } from "../../services/AuthorQueries";
 import { BookQueries } from "../../services/BookQueries";
+
+import { HttpCode } from "../../error/HttpCode";
+import { Validator } from "../../helpers/Validator";
 
 export const updateBookController = async (request: Request, response: Response) => {
     const { title, sinopsis, bookStatus, authorId } = request.body;
@@ -19,7 +22,7 @@ export const updateBookController = async (request: Request, response: Response)
     const searchAuthor = await AuthorQueries.getAuthor(parsedAuthorID);
     if(searchAuthor === null) throw new AuthorNotFoundException(parsedAuthorID)
 
-    const updatedBook = BookQueries.updateBookInfos(title, sinopsis, bookStatus, parsedAuthorID);
+    const updatedBook = BookQueries.updateBookInfos({ title: title, sinopsis: sinopsis, bookStatus: bookStatus, authorId: parsedAuthorID });
     if(!updatedBook) throw new InsertUpdateBookException(HttpCode.INTERNAL_SERVER_ERROR, `An error ocurred while updating the book.`);
 
     response.status(HttpCode.SUCCESS).json({ message: 'Book updated successfully', updatedBook: updatedBook }).end();

@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import { InvalidIdException } from "../../error/InvalidIdException";
+import { BookNotFoundException } from "../../error/Book/BookNotFoundException";
+
 import { BookQueries } from "../../services/BookQueries";
 import { BookModel } from "../../models/Book";
+
 import { Validator } from "../../helpers/Validator";
-import { BookNotFoundException } from "../../error/Book/BookNotFoundException";
 
 export const deleteBookController = async (request: Request, response: Response) => {
     const parsedId: number | false = Validator.isNumberAndPositive(request.body.id);

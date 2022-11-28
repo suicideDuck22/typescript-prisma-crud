@@ -1,4 +1,4 @@
-import { BookStatus } from "../controllers/Books/list-books"
+export type BookStatus = 'AVAILABLE' | 'UNAVAILABLE';
 
 export interface BookModel {
     id: number,

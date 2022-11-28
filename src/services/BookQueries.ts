@@ -1,6 +1,14 @@
 import { BookStatus } from "@prisma/client";
 import { prismaClient } from "../database/prismaClient";
+
 import { BookModel } from "../models/Book";
+
+interface ReceivedManipulateRequest {
+    title: string,
+    sinopsis: string | null,
+    authorId: number,
+    bookStatus?: BookStatus
+}
 
 export abstract class BookQueries {
     public static async getBook(id: number): Promise<BookModel | null> {
@@ -23,12 +31,12 @@ export abstract class BookQueries {
         });
     }
 
-    public static async addBook(title: string, sinopsis: string | null, authorId: number): Promise<BookModel> {
+    public static async addBook(newBook: ReceivedManipulateRequest): Promise<BookModel> {
         return await prismaClient.book.create({
             data: {
-                title: title,
-                sinopsis: sinopsis ? sinopsis : null,
-                authorId: authorId
+                title: newBook.title,
+                sinopsis: newBook.sinopsis ? newBook.sinopsis : null,
+                authorId: newBook.authorId
             }
         });
     }
@@ -41,21 +49,16 @@ export abstract class BookQueries {
         })
     }
 
-    public static async updateBookInfos(
-        title: string,
-        sinopsis: string | null,
-        bookStatus: BookStatus,
-        authorId: number
-        ) {
+    public static async updateBookInfos(updateBook: ReceivedManipulateRequest) {
             return await prismaClient.book.update({
                 where: {
-                    id: authorId
+                    id: updateBook.authorId
                 },
                 data: {
-                    title: title,
-                    sinopsis: sinopsis,
-                    bookStatus: bookStatus,
-                    authorId: authorId
+                    title: updateBook.title,
+                    sinopsis: updateBook.sinopsis,
+                    bookStatus: updateBook.bookStatus,
+                    authorId: updateBook.authorId
                 }
             })
     }
