@@ -4,6 +4,7 @@ import { prismaClient } from "../database/prismaClient";
 import { BookModel } from "../models/Book";
 
 interface ReceivedManipulateRequest {
+    bookId?: number,
     title: string,
     sinopsis: string | null,
     authorId: number,
@@ -52,7 +53,7 @@ export abstract class BookQueries {
     public static async updateBookInfos(updateBook: ReceivedManipulateRequest) {
             return await prismaClient.book.update({
                 where: {
-                    id: updateBook.authorId
+                    id: updateBook.bookId
                 },
                 data: {
                     title: updateBook.title,
