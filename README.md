@@ -27,7 +27,7 @@ _Dev:_
 - Eslint &rarr; For patterns.
 - Jest &rarr; For automated tests, of integrations and unit. 
 - Prisma &rarr; Database ORM.
-- Supertes &rarr; For requests on integration tests.
+- Supertest &rarr; For requests on integration tests.
 - Typescript &rarr; To compile.
 <br><br>
 
