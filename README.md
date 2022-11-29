@@ -5,6 +5,7 @@ This project will be updated, adding features to be a library system one day.<br
 Requirements:
 ---
 Is needed have installed:
+- NodeJS
 - NPM
 - Docker
 <br>
