@@ -10,7 +10,7 @@ interface testRequestObject {
 }
 
 const generalRequestBody: testRequestObject = {
-    bookId: '16',
+    bookId: '1',
     title: 'UPDATE',
     sinopsis: '',
     bookStatus: 'UNAVAILABLE',

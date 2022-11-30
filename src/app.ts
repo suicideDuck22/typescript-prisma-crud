@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
 import { errorMiddleware } from "./middlewares/error.middleware";
+import { morganMiddleware } from './config/morgan.middleware';
 
 import { router } from "./routes/books";
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(morganMiddleware);
 
 app.use('/books', router);
 
