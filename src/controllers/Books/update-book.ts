@@ -10,6 +10,7 @@ import { BookQueries } from "../../services/BookQueries";
 import { HttpCode } from "../../error/HttpCode";
 import { Validator } from "../../helpers/Validator";
 import { BookNotFoundException } from "../../error/Book/BookNotFoundException";
+import logger from "../../lib/winston-builder.logger";
 
 export const updateBookController = async (request: Request, response: Response) => {
     const { bookId, title, sinopsis, bookStatus, authorId } = request.body;
@@ -30,5 +31,6 @@ export const updateBookController = async (request: Request, response: Response)
     const updatedBook = BookQueries.updateBookInfos({ bookId: parsedBookID, title: title, sinopsis: sinopsis, bookStatus: bookStatus, authorId: parsedAuthorID });
     if(!updatedBook) throw new InsertUpdateBookException(HttpCode.INTERNAL_SERVER_ERROR, `An error ocurred while updating the book.`);
 
+    logger.info(`A book has been updated. Old Values: ${getBook}. New Values: ${updatedBook}`);
     response.status(HttpCode.SUCCESS).json({ message: 'Book updated successfully', updatedBook: updatedBook }).end();
 }

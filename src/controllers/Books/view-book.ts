@@ -8,6 +8,7 @@ import { BookModel } from "../../models/Book";
 
 import { Validator } from "../../helpers/Validator";
 import { HttpCode } from "../../error/HttpCode";
+import logger from "../../lib/winston-builder.logger";
 
 export const viewBookController = async (request: Request, response: Response) => {
     const bookId: number | false = Validator.isNumberAndPositive(request.params.id);
@@ -17,5 +18,6 @@ export const viewBookController = async (request: Request, response: Response) =
 
     if(foundedBook === null) throw new BookNotFoundException(bookId);
 
+    logger.info(`Requested to view the data of the book ${foundedBook}`);
     response.status(HttpCode.SUCCESS).json(foundedBook).end();
 }
