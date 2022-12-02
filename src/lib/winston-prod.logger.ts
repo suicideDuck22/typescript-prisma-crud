@@ -1,3 +1,4 @@
+import path from "path";
 import { format, createLogger, transports } from "winston";
 const { timestamp, combine, errors, json} = format;
 
@@ -10,7 +11,9 @@ export const buildProdLogger = () => {
         ),
         defaultMeta: { service: 'user-service' },
         transports: [
-            new transports.Console()
+            new transports.File({
+                filename: path.join(__dirname, '../../logs', 'proccess.log')
+            })
         ]
     })
 }
