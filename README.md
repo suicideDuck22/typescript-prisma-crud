@@ -32,6 +32,8 @@ _Dev:_
 <br><br>
 
 _Not Dev:_
+- Morgan &rarr; Logger of the requests.
+- Winston &rarr; Logger inside the system.
 - @prisma/client &rarr; Prisma database querier.
 - cors &rarr; For web server CORS config.
 - Express &rarr; For known purposes 	(͠≖ ͜ʖ͠≖)
