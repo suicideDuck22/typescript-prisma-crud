@@ -1,6 +1,6 @@
-import { BookStatus } from "@prisma/client";
 import { prismaClient } from "../database/prismaClient";
 
+import { BookStatus } from "@prisma/client";
 import { BookModel } from "../models/Book";
 
 interface ReceivedManipulateRequest {
@@ -12,6 +12,17 @@ interface ReceivedManipulateRequest {
 }
 
 export abstract class BookQueries {
+    public static async changeBookStatus(id: number, newStatus: BookStatus):Promise<BookModel> {
+        return await prismaClient.book.update({
+            where: {
+                id: id
+            },
+            data: {
+                bookStatus: newStatus
+            }
+        })
+    }
+
     public static async getBook(id: number): Promise<BookModel | null> {
         return await prismaClient.book.findUnique({
             where: {

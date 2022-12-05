@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { addBookController } from "../controllers/Books/add-book";
+import { changeStatusController } from "../controllers/Books/change-status";
 import { deleteBookController } from "../controllers/Books/delete-book";
 import { listBooksController } from "../controllers/Books/list-books";
 import { updateBookController } from "../controllers/Books/update-book";
@@ -13,3 +14,4 @@ router.get('/view-book/:id', viewBookController);
 router.post('/add-book', addBookController);
 router.delete('/delete-book', deleteBookController);
 router.put('/update-book', updateBookController);
+router.put('/change-status', changeStatusController);

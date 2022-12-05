@@ -21,7 +21,7 @@ export const listBooksController = async (request: Request, response: Response) 
         }
 
         logger.info('List with all books inside the database requested and sended.')
-        return response.status(HttpCode.SUCCESS).json(books).end();
+        return response.status(HttpCode.SUCCESS).json(books);
     }
 
     if(request.query.status != 'AVAILABLE' && request.query.status != 'UNAVAILABLE'){
@@ -32,9 +32,11 @@ export const listBooksController = async (request: Request, response: Response) 
     const books: BookModel[] = await BookQueries.listBooksByStatus(status);
 
     if(books.length !== 0){
-        return response.status(HttpCode.SUCCESS).json(books).end();
+        logger.info(`List with all books inside the database with status ${request.query.status} requested and sended.`)
+        return response.status(HttpCode.SUCCESS).json(books);
+    } else {
+        return noBooksFounded(response);
     }
 
-    logger.info(`List with all books inside the database with status ${request.query.status} requested and sended.`)
-    return noBooksFounded(response);
+    
 }
