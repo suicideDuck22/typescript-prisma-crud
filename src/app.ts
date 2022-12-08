@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import morganBody from "morgan-body";
 import { errorMiddleware } from "./middlewares/error.middleware";
-import { router } from "./routes/books";
+import { router } from "./routes/v1/books";
 import { loggerStream } from "./lib/morgan-body.logger";
 
 const app = express();
